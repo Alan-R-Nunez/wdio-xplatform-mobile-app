@@ -1,6 +1,7 @@
 name: Wdio-x-native
 
 on:
+  'push':
   workflow_dispatch:
     inputs:
       e2e:
@@ -8,8 +9,6 @@ on:
          description: Select a platform
          required: true
          options: 
-            - xplatform
-            - ios
             - android
          default: xplatform
       android_emulator:
@@ -19,17 +18,7 @@ on:
          options: 
             - Nexus 5
             - Nexus 6
-         default: Nexus 5
-      IOS_simulator:
-         type: choice
-         description: Select an Iphone device 
-         required: true
-         options: 
-            - iPhone 8
-            - iPhone 12 Pro
-            - iPhone 14 Pro
-         default: iphone 8
-        
+         default: Nexus 5        
 
 permissions:
   contents: write
@@ -41,7 +30,7 @@ env:
   IOS_VERSION: 16.2
   API_LEVEL: 32
   EMULATOR_NAME: Nexus
-  EMULATOR_DEVICE: ${{ inputs.android_emulator }} 
+  EMULATOR_DEVICE: Nexus 5 
   EMULATOR_VERSION: 12
   ANDROID_ARCH: x86_64
   ANDROID_TARGET: google_apis
@@ -51,63 +40,6 @@ env:
   BOOT_TIMEOUT: 700
 
 jobs:
-  ios:
-    runs-on: 
-       - macos-13
-    if: ${{ contains(github.event.inputs.e2e, 'ios') || contains(github.event.inputs.e2e, 'xplatform') }}
-    strategy:
-      matrix:
-        os: [IOS]
-        device: [$IPHONE_MODEL]
-        version: [$IOS_VERSION]
-    steps:
-      - uses: actions/checkout@v3
-         
-      - name: Export environment variables
-        run: |
-          export IPHONE_MODEL=$IPHONE_MODEL
-          export IOS_VERSION=$IOS_VERSION
-     
-      - name: check simulator list
-        run: xcrun simctl list
-     
-      - name: Start simulator
-        run: |
-          chmod a+x ./sscript/start_simu.sh
-          ./sscript/start_simu.sh
-     
-      - name: Install dependencies
-        run: | 
-          npm i
-          
-      - name: Check simulator booting status
-        run: |
-          chmod a+x ./sscript/check_simu.sh
-          ./sscript/check_simu.sh
-
-      - name: Execute the test
-        run: | 
-          npm run ios
-     
-      - name: Generate report
-        if: always()
-        run: | 
-          npx allure generate report/allure-results    
-     
-      - name: Setup Pages
-        if: always()
-        uses: actions/configure-pages@v3      
-     
-      - name: Upload artifact
-        if: always()
-        uses: actions/upload-pages-artifact@v1
-        with:
-          path: './allure-report'       
-     
-      - name: Deploy to GitHub Pages
-        if: always()
-        id: deployment
-        uses: actions/deploy-pages@v2
 
   android:
     runs-on: macos-13
