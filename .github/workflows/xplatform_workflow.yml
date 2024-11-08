@@ -41,7 +41,7 @@ permissions:
 
 env:
   IPHONE_MODEL: iPhone 14 Pro
-  IOS_VERSION: 16.2
+  IOS_VERSION: 17.2
   API_LEVEL: 32
   EMULATOR_NAME: Nexus
   EMULATOR_DEVICE: Nexus 5 
