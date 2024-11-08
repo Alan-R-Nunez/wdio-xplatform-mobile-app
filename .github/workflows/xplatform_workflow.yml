@@ -1,6 +1,7 @@
 name: Wdio-x-native
 
 on:
+  'push':
   workflow_dispatch:
     inputs:
       e2e:
