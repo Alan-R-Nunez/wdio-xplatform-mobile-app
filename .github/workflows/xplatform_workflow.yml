@@ -4,34 +4,34 @@ on:
   push:
     branches:
       - main  # Runs only when pushing to the `main` branch
-  workflow_dispatch:
-    inputs:
-      e2e:
-         type: choice
-         description: Select a platform
-         required: true
-         options: 
-            - xplatform
-            - ios
-            - android
-         default: xplatform
-      android_emulator:
-         type: choice
-         description: Select an android device 
-         required: true
-         options: 
-            - Nexus 5
-            - Nexus 6
-         default: Nexus 5
-      IOS_simulator:
-         type: choice
-         description: Select an Iphone device 
-         required: true
-         options: 
-            - iPhone 8
-            - iPhone 12 Pro
-            - iPhone 14 Pro
-         default: iphone 8
+  # workflow_dispatch:
+  #   inputs:
+  #     e2e:
+  #        type: choice
+  #        description: Select a platform
+  #        required: true
+  #        options: 
+  #           - xplatform
+  #           - ios
+  #           - android
+  #        default: xplatform
+  #     android_emulator:
+  #        type: choice
+  #        description: Select an android device 
+  #        required: true
+  #        options: 
+  #           - Nexus 5
+  #           - Nexus 6
+  #        default: Nexus 5
+  #     IOS_simulator:
+  #        type: choice
+  #        description: Select an Iphone device 
+  #        required: true
+  #        options: 
+  #           - iPhone 8
+  #           - iPhone 12 Pro
+  #           - iPhone 14 Pro
+  #        default: iphone 8
         
 
 permissions:
@@ -40,11 +40,11 @@ permissions:
   id-token: write
 
 env:
-  IPHONE_MODEL: ${{ inputs.IOS_simulator }} 
+  IPHONE_MODEL: iPhone 8
   IOS_VERSION: 16.2
   API_LEVEL: 32
   EMULATOR_NAME: Nexus
-  EMULATOR_DEVICE: ${{ inputs.android_emulator }} 
+  EMULATOR_DEVICE: Nexus 5 
   EMULATOR_VERSION: 12
   ANDROID_ARCH: x86_64
   ANDROID_TARGET: google_apis
@@ -57,7 +57,7 @@ jobs:
   ios:
     runs-on: 
        - macos-13
-    if: ${{ contains(github.event.inputs.e2e, 'ios') || contains(github.event.inputs.e2e, 'xplatform') }}
+    # if: ${{ contains(github.event.inputs.e2e, 'ios') || contains(github.event.inputs.e2e, 'xplatform') }}
     strategy:
       matrix:
         os: [IOS]
