@@ -78,7 +78,12 @@ jobs:
         run: |
           chmod a+x ./sscript/start_simu.sh
           ./sscript/start_simu.sh
-     
+
+      - name: Check simulator booting status
+        run: |
+          chmod a+x ./sscript/check_simu.sh
+          ./sscript/check_simu.sh
+          
       - name: Install dependencies
         run: | 
           npm i
