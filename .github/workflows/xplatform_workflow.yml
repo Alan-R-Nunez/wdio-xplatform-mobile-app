@@ -1,6 +1,9 @@
-name: Wdio-x-native
+name: Wdio-x-native 2.0
 
 on:
+  push:
+    branches:
+      - main  # Runs only when pushing to the `main` branch
   workflow_dispatch:
     inputs:
       e2e:
