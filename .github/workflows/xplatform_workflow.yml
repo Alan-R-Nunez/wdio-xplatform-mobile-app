@@ -40,17 +40,14 @@ permissions:
   id-token: write
 
 env:
-  IPHONE_MODEL: iPhone 14 Pro
-  IOS_VERSION: 17.2
-  API_LEVEL: 32
-  EMULATOR_NAME: Nexus
-  EMULATOR_DEVICE: Nexus 5 
-  EMULATOR_VERSION: 12
   ANDROID_ARCH: x86_64
   ANDROID_TARGET: google_apis
-  ANDROID_BUILD_TOOLS_VERSION: 34.0.0-rc4
-  ANDROID_SDK_PACKAGES: system-images;android-32;google_apis;x86_64 platforms;android-32 build-tools;34.0.0-rc4 platform-tools emulator
-  EMULATOR_TIMEOUT: 350
+  ANDROID_BUILD_TOOLS_VERSION: 33.0.2
+  ANDROID_SDK_PACKAGES: system-images;android-33;google_apis;x86_64 platforms;android-33 build-tools;33.0.2 platform-tools emulator
+  JAVA_HOME: /usr/lib/jvm/temurin-17-jdk-amd64
+  EMULATOR_TIMEOUT: 700
+  EMULATOR_NAME: pixel
+  API_LEVEL: 33
   BOOT_TIMEOUT: 700
 
 jobs:
