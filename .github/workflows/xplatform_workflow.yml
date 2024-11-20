@@ -44,7 +44,6 @@ env:
   ANDROID_TARGET: google_apis
   ANDROID_BUILD_TOOLS_VERSION: 33.0.2
   ANDROID_SDK_PACKAGES: system-images;android-33;google_apis;x86_64 platforms;android-33 build-tools;33.0.2 platform-tools emulator
-  JAVA_HOME: /usr/lib/jvm/temurin-17-jdk-amd64
   EMULATOR_TIMEOUT: 700
   EMULATOR_NAME: pixel
   API_LEVEL: 33
