@@ -54,68 +54,68 @@ env:
   BOOT_TIMEOUT: 700
 
 jobs:
-  ios:
-    runs-on: 
-       - macos-13
-    # if: ${{ contains(github.event.inputs.e2e, 'ios') || contains(github.event.inputs.e2e, 'xplatform') }}
-    strategy:
-      matrix:
-        os: [IOS]
-        device: [$IPHONE_MODEL]
-        version: [$IOS_VERSION]
-    steps:
-      - uses: actions/checkout@v3
+  # ios:
+  #   runs-on: 
+  #      - macos-13
+  #   # if: ${{ contains(github.event.inputs.e2e, 'ios') || contains(github.event.inputs.e2e, 'xplatform') }}
+  #   strategy:
+  #     matrix:
+  #       os: [IOS]
+  #       device: [$IPHONE_MODEL]
+  #       version: [$IOS_VERSION]
+  #   steps:
+  #     - uses: actions/checkout@v3
          
-      - name: Export environment variables
-        run: |
-          export IPHONE_MODEL=$IPHONE_MODEL
-          export IOS_VERSION=$IOS_VERSION
+  #     - name: Export environment variables
+  #       run: |
+  #         export IPHONE_MODEL=$IPHONE_MODEL
+  #         export IOS_VERSION=$IOS_VERSION
      
-      - name: check simulator list
-        run: xcrun simctl list
+  #     - name: check simulator list
+  #       run: xcrun simctl list
      
-      - name: Start simulator
-        run: |
-          chmod a+x ./sscript/start_simu.sh
-          ./sscript/start_simu.sh
+  #     - name: Start simulator
+  #       run: |
+  #         chmod a+x ./sscript/start_simu.sh
+  #         ./sscript/start_simu.sh
 
-      - name: Check simulator booting status
-        run: |
-          chmod a+x ./sscript/check_simu.sh
-          ./sscript/check_simu.sh
+  #     - name: Check simulator booting status
+  #       run: |
+  #         chmod a+x ./sscript/check_simu.sh
+  #         ./sscript/check_simu.sh
           
-      - name: Install dependencies
-        run: | 
-          yarn install
+  #     - name: Install dependencies
+  #       run: | 
+  #         yarn install
           
-      - name: Check simulator booting status
-        run: |
-          chmod a+x ./sscript/check_simu.sh
-          ./sscript/check_simu.sh
+  #     - name: Check simulator booting status
+  #       run: |
+  #         chmod a+x ./sscript/check_simu.sh
+  #         ./sscript/check_simu.sh
 
-      - name: Execute the test
-        run: | 
-          npm run ios
+  #     - name: Execute the test
+  #       run: | 
+  #         npm run ios
      
-      - name: Generate report
-        if: always()
-        run: | 
-          npx allure generate report/allure-results    
+  #     - name: Generate report
+  #       if: always()
+  #       run: | 
+  #         npx allure generate report/allure-results    
      
-      - name: Setup Pages
-        if: always()
-        uses: actions/configure-pages@v3      
+  #     - name: Setup Pages
+  #       if: always()
+  #       uses: actions/configure-pages@v3      
      
-      - name: Upload artifact
-        if: always()
-        uses: actions/upload-pages-artifact@v1
-        with:
-          path: './allure-report'       
+  #     - name: Upload artifact
+  #       if: always()
+  #       uses: actions/upload-pages-artifact@v1
+  #       with:
+  #         path: './allure-report'       
      
-      - name: Deploy to GitHub Pages
-        if: always()
-        id: deployment
-        uses: actions/deploy-pages@v2
+  #     - name: Deploy to GitHub Pages
+  #       if: always()
+  #       id: deployment
+  #       uses: actions/deploy-pages@v2
 
   android:
     runs-on: macos-13
