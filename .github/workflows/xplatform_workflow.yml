@@ -86,7 +86,7 @@ jobs:
           
       - name: Install dependencies
         run: | 
-          npm i
+          yarn install
           
       - name: Check simulator booting status
         run: |
