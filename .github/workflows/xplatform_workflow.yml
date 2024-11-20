@@ -119,11 +119,11 @@ jobs:
 
   android:
     runs-on: macos-13
-    if: ${{ contains(github.event.inputs.e2e, 'android') || contains(github.event.inputs.e2e, 'xplatform') }}
-    strategy:
-      matrix:
-        os: [Android]
-        emulator_name: [$EMULATOR_NAME]
+    # if: ${{ contains(github.event.inputs.e2e, 'android') || contains(github.event.inputs.e2e, 'xplatform') }}
+    # strategy:
+    #   matrix:
+    #     os: [Android]
+    #     emulator_name: [$EMULATOR_NAME]
     steps:
       - uses: actions/checkout@v3
       
